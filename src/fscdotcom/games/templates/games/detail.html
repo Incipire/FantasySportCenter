@@ -1,0 +1,39 @@
+{% extends "gamebase.html" %}
+{% load staticfiles %}
+
+{% block title %}
+{% if game %}
+{{ game }}
+{% else %}
+Game not found
+{% endif %}
+{% endblock %}
+
+{% block header %}
+<div class="row">
+	<div class ="col-3 col-sm-3 col-lg-4">
+		
+		<span>{{game.away_team.name}}</span>
+		<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.away_team.team_id|upper}}.png"
+		class="pull-right img-responsive" alt="logo"/>
+	</div>	
+	<div class = "col-3 col-sm-3 col-lg-4">
+		<table width="100%">
+			<tr>
+				<th style="text-align:center">
+					<td></td>
+					<td>1st</td>
+					<td>2nd</td>
+					<td>3rd</td>
+					<td>OT</td>
+				</th>
+			</tr>
+		</table>
+	</div>
+	<div class ="col-3 col-sm-3 col-lg-4">
+		<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team.team_id|upper}}.png"
+		class="pull-left img-responsive" alt="logo placeholder"/>
+		<span>{{game.home_team.name}}</span>
+	</div>	
+</div>
+{% endblock %}
