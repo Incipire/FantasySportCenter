@@ -1,9 +1,98 @@
-{% if games_list %}
-	<ul>
+{% extends 'gamebase.html' %}
+
+{% block sidebar %}
+	{% if games_list %}
+		<ul class="nav" >
+			{% for game in games_list %}
+			<li><a href="/games/{{game.gsis_id}}/">
+				<div>{{game.home_team.team_id}} ({{game.home_score}})</div>
+				<div>{{game.away_team.team_id}} ({{game.away_score}})</div>
+			</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No games are available.</p>
+	{% endif %}
+{% endblock %}
+
+{% block main %}
 		{% for game in games_list %}
-		<li><a href="/games/{{game.gsis_id}}/">{{game}}</a></li>
+		<div class="col-6 col-sm-6 col-lg-4 scorebox" 
+			style="margin-bottom:20px; padding:5px; ">
+			<div class="away-team" style="">
+				{% with game.away_team as team %}
+				<img class="pull-left" 
+				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{team.team_id}}.png" 
+				style="width:40px">
+				<div class="team-stats" >
+					<div class="pull-left">
+						{{team.name}}
+					</div>
+					<p class="pull-right total" style="font-size:24px">
+						{{game.away_score}}
+					</p>
+					<p class="pull-right quarter" style="font-size:13px">
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+							{{game.away_score_q1}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.away_score_q2}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.away_score_q3}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.away_score_q4}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.away_score_q5}}
+					</span>
+					</p>
+				</div>
+				{% endwith %}
+				</div>
+			<div class="home-team" style="clear:both; background-color:#0a1725">
+				{% with game.home_team as team %}
+				<img class="pull-left" 
+				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{team.team_id}}.png" 
+				style="width:40px">
+				<div class="team-stats" >
+					<div class="pull-left">
+						{{team.name}}
+					</div>
+					<p class="pull-right total" style="font-size:24px">
+						{{game.home_score}}
+					</p>
+					<p class="pull-right quarter" style="font-size:13px">
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+							{{game.home_score_q1}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.home_score_q2}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.home_score_q3}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.home_score_q4}}
+					</span>
+					<span class="pull-left" 
+						style="width:15px; margin:1px; height:27px">
+						{{game.home_score_q5}}
+					</span>
+					</p>
+				</div>
+				{% endwith %}
+				</div>
+		</div>
 		{% endfor %}
-	</ul>
-{% else %}
-	<p>No games are available.</p>
-{% endif %}
+{% endblock %}
