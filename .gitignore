@@ -40,3 +40,6 @@ Scripts
  
 # MacOSX
 .DS_Store
+
+# Vim
+*.swp

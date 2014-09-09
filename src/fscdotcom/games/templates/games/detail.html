@@ -1,0 +1,58 @@
+{% extends "gamebase.html" %}
+{% load staticfiles %}
+
+{% block title %}
+{% if game %}
+{{ game }}
+{% else %}
+Game not found
+{% endif %}
+{% endblock %}
+
+{% block header %}
+<div class="row">
+	<div class ="col-3 col-sm-3 col-lg-4">
+		
+		<span>{{game.away_team.name}}</span>
+		<h1 class="pull-right">{{game.away_score}}</h1>
+		<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.away_team.team_id|upper}}.png"
+		class="img-responsive" alt="logo"/>
+	</div>	
+	<div class = "col-3 col-sm-3 col-lg-4">
+		<table style="font-size:14px" width="100%">
+			<tr>
+					<th></th>
+					<th>1st</th>
+					<th>2nd</th>
+					<th>3rd</th>
+					<th>4th</th>
+					<th>OT</th>
+			</tr>
+			<tr>
+				<td>{{game.away_team.name}}</td>
+				<td>{{game.away_score_q1}}</td>
+				<td>{{game.away_score_q2}}</td>
+				<td>{{game.away_score_q3}}</td>
+				<td>{{game.away_score_q4}}</td>
+				<td>{{game.away_score_q5}}</td>
+			</tr>
+			<tr>
+				<td>{{game.home_team.name}}</td>
+				<td>{{game.home_score_q1}}</td>
+				<td>{{game.home_score_q2}}</td>
+				<td>{{game.home_score_q3}}</td>
+				<td>{{game.home_score_q4}}</td>
+				<td>{{game.home_score_q5}}</td>
+			</tr>
+		</table>
+	</div>
+	<div class ="col-3 col-sm-3 col-lg-4">
+		<h1 class="pull-left">{{game.home_score}}</h1>
+		<div class="pull-right">
+			<span >{{game.home_team.name}}</span>
+			<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team.team_id|upper}}.png"
+			class="img-responsive" alt="logo placeholder"/>
+		</div>
+	</div>	
+</div>
+{% endblock %}
