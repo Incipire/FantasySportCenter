@@ -162,12 +162,12 @@ class Game(models.Model):
     time_inserted = models.DateTimeField()
     time_updated = models.DateTimeField()
     def __unicode__(self):
-	    return "{}({}) vs. {}({}) {}".format(
+	    return "{}({}) vs. {}({})".format(
 			    self.home_team,
 			    self.home_score,
 			    self.away_team,
 			    self.away_score,
-			    self.start_time) 
+			    ) 
     class Meta:
         managed = False
         db_table = 'game'

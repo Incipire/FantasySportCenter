@@ -5,13 +5,15 @@
 		<ul class="nav" >
 			{% for game in games_list %}
 			<li><a href="/games/{{game.gsis_id}}/">
-				<div>{{game.home_team.team_id}} ({{game.home_score}})</div>
-				<div>{{game.away_team.team_id}} ({{game.away_score}})</div>
+				<div>{{game.home_team}} ({{game.home_score}})</div>
+				<div>{{game.away_team}} ({{game.away_score}})</div>
 			</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}
 		<p>No games are available.</p>
+		{{current}}
+		{{year}}
 	{% endif %}
 {% endblock %}
 
@@ -23,13 +25,12 @@
 				style="background-color:grey; padding-top:10px">
 
 			<div class="away-team" style="">
-				{% with game.away_team as team %}
 				<img class="pull-left" 
-				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{team.team_id}}.png" 
+				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.away_team}}.png" 
 				style="width:40px">
 				<div class="team-stats" >
 					<div class="pull-left">
-						{{team.name}}
+						{{game.away_team}}
 					</div>
 					<p class="pull-right total" 
 						style="font-size:20px; margin-left:3px; width:28px">
@@ -59,16 +60,14 @@
 					</span>
 					</p>
 				</div>
-				{% endwith %}
 				</div>
 			<div class="home-team" style="clear:both; background-color:#0a1725">
-				{% with game.home_team as team %}
 				<img class="pull-left" 
-				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{team.team_id}}.png" 
+				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team}}.png" 
 				style="width:40px">
 				<div class="team-stats" >
 					<div class="pull-left">
-						{{team.name}}
+						{{game.home_team}}
 					</div>
 					<p class="pull-right total" 
 						style="font-size:20px; margin-left:3px; width:28px">
@@ -98,7 +97,6 @@
 					</span>
 					</p>
 				</div>
-				{% endwith %}
 				</div>
 			</div>
 		</div>
