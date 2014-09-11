@@ -1,0 +1,109 @@
+Version 0.1
+===========
+First public build of FSC includes the following commits
+
+commit c5f23111079f6da58e3eccf9c3eec9425e6b674b
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Wed Sep 10 16:39:21 2014 -0500
+
+    Updated url mappings
+
+commit e4b661e5d94fa4862f89ee98343b2cbdac4cdf06
+Merge: 9936c39 b4fd6fc
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Wed Sep 10 13:41:20 2014 -0500
+
+    Merge branch 'week_selection' into develop
+    Pushing week selection feature
+
+commit b4fd6fca34567c9b68c4fdd7b8692f76343dd0f7
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Wed Sep 10 13:39:52 2014 -0500
+
+    Added ability to navigate by season and week (auto navigates to current season and week)
+
+commit 9936c395fc0e5f0c8d923b7f37d20bdb0ec52787
+Merge: 66ca75d 66829b8
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Tue Sep 9 18:00:55 2014 -0500
+
+    Merge branch 'game_display' into develop
+    Merging basic game_display feature to the develop branch
+
+commit 66829b8f8aab1c16eeaaa530a0b5a51c8a1f1f01
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Tue Sep 9 17:16:05 2014 -0500
+
+    Completed basic layout for gamebox
+
+commit 9f36264fb0c23942ab39b288449d72947826af43
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Tue Sep 9 03:50:30 2014 -0500
+
+    fighting with ui have boxscores displaying on games list
+
+commit 2dd560f8a580c9ed6bf2f856f8b93bed5ccbd5ca
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Sep 8 17:21:20 2014 -0500
+
+    implementing look and feel for the game detail UI
+
+commit dea68b7588727f9df69721ffaa0d82a27a09afe9
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sun Sep 7 12:15:37 2014 -0500
+
+    List of current games (hardcoded)
+
+commit ae5ebe141e971aec74ec51568b73d21523e955d8
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sun Sep 7 03:46:30 2014 -0500
+
+    manual model
+
+commit a9c8dfca239d949120195641102496b4693c94cc
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sun Aug 31 01:22:09 2014 -0500
+
+    Added Unlicense.
+
+commit 66ca75d0e49ee9baa5ea0c1431ce07a2b2c404b8
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Aug 30 20:43:50 2014 -0500
+
+    Renamed fsc to fscdotcom
+
+commit cbcb7144c273b20d6b124f766263887af570ff30
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Aug 30 20:25:37 2014 -0500
+
+    Added basic description to README.md
+
+commit 1eb7d40e3b643a509b6585bc16033a2ff5a31951
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Aug 30 19:22:31 2014 -0500
+
+    Added README.md
+
+commit 388df6aa71caf1c713bcec59d1ab709069f25c00
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Aug 30 18:23:59 2014 -0500
+
+    renamed toplevel fsc directory to src
+
+commit 31aaac2d7594ae4eede976e5acd2284af936d749
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Aug 30 18:20:14 2014 -0500
+
+    Created fsc and games projects
+
+commit a20de11d6fa9c35a9d668e1ee78ecef2a3b50205
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Fri Aug 29 13:15:35 2014 -0500
+
+    Renaming project module
+
+commit 1f1cfd5866bb165d16707be05c7ebd7b27291ef5
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Fri Aug 29 13:10:40 2014 -0500
+
+    First version of FantasySportCenter
