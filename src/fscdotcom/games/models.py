@@ -168,8 +168,8 @@ class Game(models.Model):
                 self.away_team,
                 self.away_score,
                 ) 
-        class Meta:
-            managed = False
+    class Meta:
+        managed = False
         db_table = 'game'
 
 class Meta(models.Model):
