@@ -20,8 +20,25 @@ def index(request,year=0,week=0,season_type='Regular'):
 
 
 def detail(request, gsid):
-    try:
-        game = Game.objects.get(pk=gsid)
-    except Game.DoesNotExist:
+    db = nfldb.connect()
+    q = nfldb.Query(db).game(gsis_id=gsid)
+    games=q.as_games()
+    if (len(games)!=1):
         raise Http404
-    return render(request, 'games/detail.html', {'game':game})
+    game = games[0] 
+    q.player(team=game.away_team)
+    away_pass=q.aggregate(passing_att__gt = 0).sort('passing_yds').as_aggregate()
+    home_pass=nfldb.Query(db).game(gsis_id=gsid).player(team=game.home_team).aggregate(passing_att__gt = 0).sort('passing_yds').as_aggregate()
+    home_rec=nfldb.Query(db).game(gsis_id=gsid).player(team=game.home_team).aggregate(receiving_rec__gt = 0).sort('receiving_yds').as_aggregate()
+    away_rec=nfldb.Query(db).game(gsis_id=gsid).player(team=game.away_team).aggregate(receiving_rec__gt = 0).sort('receiving_yds').as_aggregate()
+    away_run=nfldb.Query(db).game(gsis_id=gsid).player(team=game.away_team).aggregate(rushing_att__gt = 0).sort('rushing_yds').as_aggregate()
+    home_run=nfldb.Query(db).game(gsis_id=gsid).player(team=game.home_team).aggregate(rushing_att__gt = 0).sort('rushing_yds').as_aggregate()
+    return render(request, 'games/detail.html', 
+            {'game':game, 
+                'away_run':away_run,
+                'home_run':home_run,
+                'away_pass':away_pass, 
+                'home_pass':home_pass,
+                'home_rec':home_rec,
+                'away_rec':away_rec,
+                })
