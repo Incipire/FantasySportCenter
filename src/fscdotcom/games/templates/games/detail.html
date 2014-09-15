@@ -9,6 +9,24 @@ Game not found
 {% endif %}
 {% endblock %}
 
+{% block sidebar %}
+	{% if games %}
+	Games this week
+		<ul class="nav" >
+			{% for game in games %}
+			<li><a href="/games/{{game.gsis_id}}/">
+				<div>{{game.home_team}} ({{game.home_score}})</div>
+				<div>{{game.away_team}} ({{game.away_score}})</div>
+			</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No games are available.</p>
+		{{current}}
+		{{year}}
+	{% endif %}
+{% endblock %}
+
 {% block header %}
 <div class="row">
 	<div class ="col-3 col-sm-3 col-lg-4">

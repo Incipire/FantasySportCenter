@@ -12,7 +12,7 @@ def index(request,year=0,week=0,season_type='Regular'):
         week = current[2]
         season_type = current[0]
         return redirect('index',year, season_type.name, week)
-    q =nfldb.Query(db).game(season_year=year, season_type=season_type, week=week) 
+    q =nfldb.Query(db).game(season_year=year, season_type=season_type, week=week).sort('start_time')
     games=q.as_games()
     #games=Game.objects.filter(season_year=2014).filter(week=1).filter(season_type='Regular')
     return render(request, 'games/index.html', 
@@ -26,6 +26,10 @@ def detail(request, gsid):
     if (len(games)!=1):
         raise Http404
     game = games[0] 
+    year=game.season_year
+    week=game.week
+    season_type=game.season_type
+    games =nfldb.Query(db).game(season_year=year, season_type=season_type, week=week).sort('start_time').as_games() 
     q.player(team=game.away_team)
     away_pass=q.aggregate(passing_att__gt = 0).sort('passing_yds').as_aggregate()
     home_pass=nfldb.Query(db).game(gsis_id=gsid).player(team=game.home_team).aggregate(passing_att__gt = 0).sort('passing_yds').as_aggregate()
@@ -41,4 +45,5 @@ def detail(request, gsid):
                 'home_pass':home_pass,
                 'home_rec':home_rec,
                 'away_rec':away_rec,
+                'games':games,
                 })
