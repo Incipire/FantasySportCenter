@@ -1,28 +1,30 @@
 {% extends 'gamebase.html' %}
 
 {% block sidebar %}
-	{% if games_list %}
-		<ul class="nav" >
-			{% for game in games_list %}
-			<li><a href="/games/{{game.gsis_id}}/">
-				<div>{{game.home_team}} ({{game.home_score}})</div>
-				<div>{{game.away_team}} ({{game.away_score}})</div>
-			</a></li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<p>No games are available.</p>
-		{{current}}
-		{{year}}
-	{% endif %}
+{% if games_list %}
+Games this week
+<ul class="nav" >
+	{% for game in games_list %}
+	<li><a href="/games/{{game.gsis_id}}/">
+		<div>{{game.home_team}} ({{game.home_score}})</div>
+		<div>{{game.away_team}} ({{game.away_score}})</div>
+	</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No games are available.</p>
+{{current}}
+{{year}}
+{% endif %}
 {% endblock %}
 
 {% block main %}
-		{% for game in games_list %}
-		<div class="col-6 col-sm-6 col-lg-4 scorebox" 
-			style="padding:5px; padding-top:10px;min-width:292px ">
-			<div class="container" 
-				style="background-color:grey; padding-top:10px">
+{% for game in games_list %}
+
+	<div class="col-6 col-sm-6 col-lg-4 scorebox" 
+		style="padding:5px; padding-top:10px;min-width:292px;link:white ">
+		<div class="container" 
+			style="background-color:grey; padding-top:10px">
 
 			<div class="away-team" style="">
 				<img class="pull-left" 
@@ -33,14 +35,14 @@
 						{{game.away_team}}
 					</div>
 					<p class="pull-right total" 
-						style="font-size:20px; margin-left:3px; width:28px">
-						{{game.away_score}}
+					style="font-size:20px; margin-left:3px; width:28px">
+					{{game.away_score}}
 					</p>
 					<p class="pull-right quarter" 
-						style="font-size:13px; text-align:right">
+					style="font-size:13px; text-align:right">
 					<span class="pull-left" 
 						style="width:15px; margin:3px; ">
-							{{game.away_score_q1}}
+						{{game.away_score_q1}}
 					</span>
 					<span class="pull-left" 
 						style="width:15px; margin:3px; ">
@@ -60,7 +62,7 @@
 					</span>
 					</p>
 				</div>
-				</div>
+			</div>
 			<div class="home-team" style="clear:both; background-color:#0a1725">
 				<img class="pull-left" 
 				src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team}}.png" 
@@ -70,14 +72,14 @@
 						{{game.home_team}}
 					</div>
 					<p class="pull-right total" 
-						style="font-size:20px; margin-left:3px; width:28px">
-						{{game.home_score}}
+					style="font-size:20px; margin-left:3px; width:28px">
+					{{game.home_score}}
 					</p>
 					<p class="pull-right quarter" 
-						style="font-size:13px;text-align:right">
+					style="font-size:13px;text-align:right">
 					<span class="pull-left" 
 						style="width:15px; margin:3px; ">
-							{{game.home_score_q1}}
+						{{game.home_score_q1}}
 					</span>
 					<span class="pull-left" 
 						style="width:15px; margin:3px; ">
@@ -97,8 +99,14 @@
 					</span>
 					</p>
 				</div>
-				</div>
+			</div>
+			<div style="clear:both;">
+				<a href="/games/{{game.gsis_id}}/">
+					View Details
+				</a>
 			</div>
 		</div>
-		{% endfor %}
+	</div>
+</a>
+{% endfor %}
 {% endblock %}

@@ -9,24 +9,42 @@ Game not found
 {% endif %}
 {% endblock %}
 
+{% block sidebar %}
+	{% if games %}
+	Games this week
+		<ul class="nav" >
+			{% for game in games %}
+			<li><a href="/games/{{game.gsis_id}}/">
+				<div>{{game.home_team}} ({{game.home_score}})</div>
+				<div>{{game.away_team}} ({{game.away_score}})</div>
+			</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No games are available.</p>
+		{{current}}
+		{{year}}
+	{% endif %}
+{% endblock %}
+
 {% block header %}
 <div class="row">
 	<div class ="col-3 col-sm-3 col-lg-4">
-		
+
 		<span>{{game.away_team.name}}</span>
 		<h1 class="pull-right">{{game.away_score}}</h1>
-		<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.away_team.team_id|upper}}.png"
+		<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.away_team|upper}}.png"
 		class="img-responsive" alt="logo"/>
 	</div>	
 	<div class = "col-3 col-sm-3 col-lg-4">
 		<table style="font-size:14px" width="100%">
 			<tr>
-					<th></th>
-					<th>1st</th>
-					<th>2nd</th>
-					<th>3rd</th>
-					<th>4th</th>
-					<th>OT</th>
+				<th></th>
+				<th>1st</th>
+				<th>2nd</th>
+				<th>3rd</th>
+				<th>4th</th>
+				<th>OT</th>
 			</tr>
 			<tr>
 				<td>{{game.away_team.name}}</td>
@@ -50,9 +68,132 @@ Game not found
 		<h1 class="pull-left">{{game.home_score}}</h1>
 		<div class="pull-right">
 			<span >{{game.home_team.name}}</span>
-			<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team.team_id|upper}}.png"
+			<img src="http://i.nflcdn.com/static/site/6.1/img/logos/teams-matte-80x53/{{game.home_team|upper}}.png"
 			class="img-responsive" alt="logo placeholder"/>
 		</div>
 	</div>	
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="col-6 col-sm-6 col-lg-6">
+	<table width="100%">
+		<tr>
+			<th colspan="4">Passing</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Att/Comp</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in away_pass %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.passing_att}}/{{player.passing_cmp}}</td>
+			<td>{{player.passing_yds}}</td>
+			<td>{{player.passing_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+	<table width="100%">
+		<tr>
+			<th colspan="4">Receiving</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Receptions</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in away_rec %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.receiving_rec}}</td>
+			<td>{{player.receiving_yds}}</td>
+			<td>{{player.receiving_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+	<table width="100%">
+		<tr>
+			<th colspan="4">Rushing</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Carries</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in away_run %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.rushing_att}}</td>
+			<td>{{player.rushing_yds}}</td>
+			<td>{{player.rushing_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+
+</div>
+<div class="col-6 col-sm-6 col-lg-6">
+	<table width="100%">
+		<tr>
+			<th colspan="4">Passing</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Att/Comp</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in home_pass %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.passing_att}}/{{player.passing_cmp}}</td>
+			<td>{{player.passing_yds}}</td>
+			<td>{{player.passing_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+	<table width="100%">
+		<tr>
+			<th colspan="4">Receiving</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Receptions</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in home_rec %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.receiving_rec}}</td>
+			<td>{{player.receiving_yds}}</td>
+			<td>{{player.receiving_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+	<table width="100%">
+		<tr>
+			<th colspan="4">Rushing</th>
+		</tr>
+		<tr>
+			<th>Player</th>
+			<th>Carries</th>
+			<th>Yards</th>
+			<th>TD</th>
+		</tr>
+		{% for player in home_run %}
+		<tr>
+			<td>{{player.player.full_name}}</td>
+			<td>{{player.rushing_att}}</td>
+			<td>{{player.rushing_yds}}</td>
+			<td>{{player.rushing_tds}}</td>
+		</tr>
+		{% endfor %}
+	</table>	
+
 </div>
 {% endblock %}

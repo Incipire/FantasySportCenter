@@ -162,12 +162,12 @@ class Game(models.Model):
     time_inserted = models.DateTimeField()
     time_updated = models.DateTimeField()
     def __unicode__(self):
-	    return "{}({}) vs. {}({})".format(
-			    self.home_team,
-			    self.home_score,
-			    self.away_team,
-			    self.away_score,
-			    ) 
+        return "{}({}) vs. {}({})".format(
+                self.home_team,
+                self.home_score,
+                self.away_team,
+                self.away_score,
+                ) 
     class Meta:
         managed = False
         db_table = 'game'
@@ -344,7 +344,7 @@ class Team(models.Model):
     city = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     def __unicode__(self):
-	    return "{} {}".format(self.city,self.name)
+        return "{} {}".format(self.city,self.name)
     class Meta:
         managed = False
         db_table = 'team'
