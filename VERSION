@@ -1,3 +1,40 @@
+===========
+Version 0.2
+===========
+Almost ready to be seen by the public
+
+commit 3b8d62744068d0400be8c509730240015daa8ea5
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Sep 15 03:34:55 2014 -0500
+
+    re-ordered game index by start time
+
+commit 8c04de8a32fceca8ce1f8c0fee245da991bbb0fc
+Merge: bd725d9 c38125f
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Sep 15 02:30:02 2014 -0500
+
+    Merge branch 'game_stats_display' into develop
+
+commit c38125fa626874003b85cbe8fe7f33a9926bf453
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Sep 15 02:28:38 2014 -0500
+
+    details screen now shows passing, rushing, and receiving stats
+
+commit bd725d9282e3cb1c561abf96dfd609b20a447f4c
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sat Sep 13 14:09:44 2014 -0500
+
+    Fixed the breaks in auto-indent
+
+commit ebdf5bca2cf19a5007bd1967dbddca0341900a2d
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Fri Sep 12 10:48:55 2014 -0500
+
+    Fixed indentation
+
+===========
 Version 0.1
 ===========
 First public build of FSC includes the following commits
@@ -107,3 +144,4 @@ Author: Michael Brown <mbrown@incipire.com>
 Date:   Fri Aug 29 13:10:40 2014 -0500
 
     First version of FantasySportCenter
+
