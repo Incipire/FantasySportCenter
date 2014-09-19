@@ -14,7 +14,7 @@ Game not found
 	Games this week
 		<ul class="nav" >
 			{% for game in games %}
-			<li><a href="/games/{{game.gsis_id}}/">
+			<li><a href="{% url 'detail' game.gsis_id %}">
 				<div>{{game.home_team}} ({{game.home_score}})</div>
 				<div>{{game.away_team}} ({{game.away_score}})</div>
 			</a></li>
@@ -89,7 +89,7 @@ Game not found
 		</tr>
 		{% for player in away_pass %}
 		<tr>
-			<td>{{player.player.full_name}}</td>
+			<td><a href="{% url 'player_detail' player.player_id %}">{{player.player.full_name}}</a></td>
 			<td>{{player.passing_att}}/{{player.passing_cmp}}</td>
 			<td>{{player.passing_yds}}</td>
 			<td>{{player.passing_tds}}</td>
