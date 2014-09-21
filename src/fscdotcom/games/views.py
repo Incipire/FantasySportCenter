@@ -21,11 +21,24 @@ def player_detail(request, player_id):
     db = nfldb.connect()
     q = nfldb.Query(db).player(player_id=player_id)
     players = q.as_players()
+    current=nfldb.current(db)
+    season_type = current[0]
+    year =current[1]
+    week = current[2]
     if (len(players)!=1):
         raise Http404
     player = players[0]
+    games = nfldb.Query(db).player(player_id=player_id).game(season_year=year,season_type=season_type,week__le=week).sort('week').as_games()
+    player_games=[]
+    for game in games:
+        agg = nfldb.Query(db).player(player_id=player_id).game(gsis_id=game.gsis_id).as_aggregate()[0]
+        pass_avg=0
+        if (agg.passing_att>0):
+            pass_avg=agg.passing_yds/float(agg.passing_att)
+        player_games.append({'player':agg,'game':game,'pass_avg':pass_avg})
+
     return render(request, 'games/player_detail.html',
-            {'player':player})
+            {'player':player, 'player_games':player_games})
 
 def detail(request, gsid):
     db = nfldb.connect()

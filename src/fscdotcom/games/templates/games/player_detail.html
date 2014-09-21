@@ -1,5 +1,72 @@
 {% extends 'gamebase.html' %}
+{% load staticfiles %}
+
+{% block header %}
+<div class="container" style="margin:-40px;">
+	<div class="col-2 col-sm-6 col-lg-2">
+		<img id="profile-pic" height="100" src="{% static 'games/images/profilesub.png' %}" alt=""/>
+	</div>
+	<div class="col-10 col-sm-6">{{player.full_name}} </div>
+	<div class="col-10 col-sm-6">#{{player.uniform_number}} {{player.position}} {{player.team}}</div>
+</div>
+{% endblock %}
 
 {% block main %}
-{{ player }}
+<div class="col-9">
+
+	<table cellpadding="4">
+		<tr>
+			<th>Wk</th>
+			<th>Opp</th>
+			<th>Result</th>
+			<th colspan="10">Passing</th>
+			<th colspan="4">Rushing</th>
+			<th colspan="2">Fumbles</th>
+		</tr>
+		<tr style="font-size:10px">
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>Comp</th>
+			<th>Att</th>
+			<th>Pct</th>
+			<th>Yds</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>Int</th>
+			<th>Sck</th>
+			<th>SckY</th>
+			<th>Rate</th>
+			<th>Att</th>
+			<th>Yds</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>FUM</th>
+			<th>Lost</th>
+		</tr>
+		{% for game in player_games %}
+		<tr style="font-size:10px">
+			<td>{{game.game.week}}</td>
+			<td></td>
+			<td></td>
+			<td>{{game.player.passing_cmp}}</td>
+			<td>{{game.player.passing_att}}</td>
+			<td>{% widthratio game.player.passing_cmp game.player.passing_att 100 %}</td>
+			<td>{{game.player.passing_yds}}</td>
+			<td>{{game.pass_avg|floatformat:-2}}</td>
+			<td>{{game.player.passing_tds}}</td>
+			<td>{{game.player.passing_int}}</td>
+			<td>{{game.player.passing_sk}}</td>
+			<td>{{game.player.passing_sk_yds}}</td>
+			<td></td>
+			<td>{{game.player.rushing_att}}</td>
+			<td>{{game.player.rushing_yds}}</td>
+			<td></td>
+			<td>{{game.player.rushing_tds}}</td>
+			<td>{{game.player.fumbles_tot}}</td>
+			<td>{{game.player.fumbles_lost}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
 {% endblock %}
