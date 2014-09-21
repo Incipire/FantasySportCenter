@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.template import RequestContext, loader
 import nfldb
-from models import Game,Meta
 
 def index(request,year=0,week=0,season_type='Regular'):
     db = nfldb.connect()
@@ -14,10 +13,32 @@ def index(request,year=0,week=0,season_type='Regular'):
         return redirect('index',year, season_type.name, week)
     q =nfldb.Query(db).game(season_year=year, season_type=season_type, week=week).sort('start_time')
     games=q.as_games()
-    #games=Game.objects.filter(season_year=2014).filter(week=1).filter(season_type='Regular')
     return render(request, 'games/index.html', 
             {'games_list':games, 'current':current, 'year':year})
 
+
+def player_detail(request, player_id):
+    db = nfldb.connect()
+    q = nfldb.Query(db).player(player_id=player_id)
+    players = q.as_players()
+    current=nfldb.current(db)
+    season_type = current[0]
+    year =current[1]
+    week = current[2]
+    if (len(players)!=1):
+        raise Http404
+    player = players[0]
+    games = nfldb.Query(db).player(player_id=player_id).game(season_year=year,season_type=season_type,week__le=week).sort('week').as_games()
+    player_games=[]
+    for game in games:
+        agg = nfldb.Query(db).player(player_id=player_id).game(gsis_id=game.gsis_id).as_aggregate()[0]
+        pass_avg=0
+        if (agg.passing_att>0):
+            pass_avg=agg.passing_yds/float(agg.passing_att)
+        player_games.append({'player':agg,'game':game,'pass_avg':pass_avg})
+
+    return render(request, 'games/player_detail.html',
+            {'player':player, 'player_games':player_games})
 
 def detail(request, gsid):
     db = nfldb.connect()

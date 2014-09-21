@@ -1,4 +1,22 @@
 ===========
+Version 0.3
+===========
+Added rudimentary player information
+information
+
+commit 71618848d830302f344c0bf6343f25a34bf8d36d
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Sun Sep 21 06:02:13 2014 -0500
+
+    QB stats displaying on player page. Default Image in player pic
+
+commit d1f80052b048862bb447351fd81981329cb87a4e
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Fri Sep 19 18:15:06 2014 -0500
+
+    Added basic player_detail view function and template updated anchor tags to use django url tag
+
+===========
 Version 0.2
 ===========
 Almost ready to be seen by the public
