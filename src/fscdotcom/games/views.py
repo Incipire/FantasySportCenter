@@ -7,9 +7,7 @@ def index(request,year=0,week=0,season_type='Regular'):
     db = nfldb.connect()
     current=nfldb.current(db)
     if year==0 :
-        year =current[1]
-        week = current[2]
-        season_type = current[0]
+        season_type,year,week=nfldb.current(db)
         return redirect('index',year, season_type.name, week)
     q =nfldb.Query(db).game(season_year=year, season_type=season_type, week=week).sort('start_time')
     games=q.as_games()
@@ -19,26 +17,43 @@ def index(request,year=0,week=0,season_type='Regular'):
 
 def player_detail(request, player_id):
     db = nfldb.connect()
-    q = nfldb.Query(db).player(player_id=player_id)
-    players = q.as_players()
-    current=nfldb.current(db)
-    season_type = current[0]
-    year =current[1]
-    week = current[2]
-    if (len(players)!=1):
+    player = nfldb.Player.from_id(db,player_id) 
+
+    if (player is None):
         raise Http404
-    player = players[0]
-    games = nfldb.Query(db).player(player_id=player_id).game(season_year=year,season_type=season_type,week__le=week).sort('week').as_games()
+    player_games= get_player_stats_by_game(player_id,db)
+    template=select_player_template(player)
+    return render(request, template,
+       {'player':player, 'player_games':player_games})
+
+
+def get_player_stats_by_game(player_id,db):
+    #Get the season typ, year, and week
+    season_type,year,week=nfldb.current(db)
+    q = nfldb.Query(db).player(player_id=player_id)
+    games = q.game(season_year=year,season_type=season_type,week__le=week).sort(('week','asc')).as_games()
     player_games=[]
     for game in games:
         agg = nfldb.Query(db).player(player_id=player_id).game(gsis_id=game.gsis_id).as_aggregate()[0]
         pass_avg=0
+        rushing_avg=0
+        receiving_avg=0
         if (agg.passing_att>0):
-            pass_avg=agg.passing_yds/float(agg.passing_att)
-        player_games.append({'player':agg,'game':game,'pass_avg':pass_avg})
+          pass_avg=agg.passing_yds/float(agg.passing_att)
+        if (agg.rushing_att>0):
+          rushing_avg=agg.rushing_yds/float(agg.rushing_att)
+        if (agg.receiving_rec>0):
+          receiving_avg=agg.receiving_yds/float(agg.receiving_rec)
+        player_games.append({'player':agg,'game':game,'pass_avg':pass_avg, 'rushing_avg':rushing_avg, 'receiving_avg':receiving_avg})
+    return player_games
 
-    return render(request, 'games/player_detail.html',
-            {'player':player, 'player_games':player_games})
+def select_player_template(player):
+    template = 'games/player_detail.html'
+    if(str(player.position)=='WR'):
+        template= 'games/player_wr_detail.html'
+    if(str(player.position)=='RB'):
+        template='games/player_rb_detail.html'
+    return template
 
 def detail(request, gsid):
     db = nfldb.connect()

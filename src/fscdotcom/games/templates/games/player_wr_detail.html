@@ -1,0 +1,64 @@
+{% extends 'gamebase.html' %}
+{% load staticfiles %}
+
+{% block header %}
+<div class="container" style="margin:-40px;">
+	<div class="col-2 col-sm-6 col-lg-2">
+		<img id="profile-pic" height="100" src="{% static 'games/images/profilesub.png' %}" alt=""/>
+	</div>
+	<div class="col-10 col-sm-6">{{player.full_name}} </div>
+	<div class="col-10 col-sm-6">#{{player.uniform_number}} {{player.position}} {{player.team}}</div>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="col-9">
+
+	<table cellpadding="4">
+		<tr>
+			<th>Wk</th>
+			<th>Opp</th>
+			<th>Result</th>
+			<th colspan="5">Receiving</th>
+			<th colspan="5">Rushing</th>
+			<th colspan="2">Fumbles</th>
+		</tr>
+		<tr style="font-size:10px">
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>Rec</th>
+			<th>Yds</th>
+			<th>Lng</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>Att</th>
+			<th>Yds</th>
+			<th>Lng</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>FUM</th>
+			<th>Lost</th>
+		</tr>
+		{% for game in player_games %}
+		<tr style="font-size:10px">
+			<td>{{game.game.week}}</td>
+			<td></td>
+			<td></td>
+			<td>{{game.player.receiving_rec}}</td>
+			<td>{{game.player.receiving_yds}}</td>
+			<td>0</td>
+			<td>{{game.receiving_avg|floatformat:-2}}</td>
+			<td>{{game.player.receiving_tds}}</td>
+			<td>{{game.player.rushing_att}}</td>
+			<td>{{game.player.rushing_yds}}</td>
+			<td></td>
+			<td>{{game.rushing_avg|floatformat:-2}}</td>
+			<td>{{game.player.rushing_tds}}</td>
+			<td>{{game.player.fumbles_tot}}</td>
+			<td>{{game.player.fumbles_lost}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}
