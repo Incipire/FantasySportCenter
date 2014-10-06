@@ -1,4 +1,21 @@
 ===========
+Version 0.4
+===========
+Extended player information, additional stats for WR/RB
+
+commit 4844eb49319ea97ab9489a815710300f2620084f
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Oct 6 17:41:28 2014 -0500
+
+    Display seasonal stats for WR/RB
+
+commit b00db15068f2c149cf519d3f9b72286c6ac6fbfb
+Author: Michael Brown <mbrown@incipire.com>
+Date:   Mon Sep 22 17:46:22 2014 -0500
+
+    Enhancing the player detail views.
+
+===========
 Version 0.3
 ===========
 Added rudimentary player information
@@ -162,4 +179,5 @@ Author: Michael Brown <mbrown@incipire.com>
 Date:   Fri Aug 29 13:10:40 2014 -0500
 
     First version of FantasySportCenter
+
 
