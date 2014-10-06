@@ -78,17 +78,18 @@
 			<th>FUM</th>
 			<th>Lost</th>
 		</tr>
-		{% for season in seasons %}
+		{% for season in player_seasons %}
 		<tr style="font-size:10px">
-			<td>{{season.year}}</td>
+			<td>{{season.season}}</td>
 			<td>{{season.player.receiving_rec}}</td>
 			<td>{{season.player.receiving_yds}}</td>
-			<td>0</td>
+			<td></td>
 			<td>{{season.receiving_avg|floatformat:-2}}</td>
 			<td>{{season.player.receiving_tds}}</td>
 			<td>{{season.player.rushing_att}}</td>
 			<td>{{season.player.rushing_yds}}</td>
 			<td></td>
+			<td>{{season.rushing_avg|floatformat:-2}}</td>
 			<td>{{season.player.rushing_tds}}</td>
 			<td>{{season.player.fumbles_tot}}</td>
 			<td>{{season.player.fumbles_lost}}</td>

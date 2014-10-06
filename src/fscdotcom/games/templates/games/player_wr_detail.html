@@ -61,4 +61,40 @@
 		{% endfor %}
 	</table>
 </div>
+<div class="col-9k">
+	<table cellpadding="4">
+		<tr>
+			<th>Season</th>
+			<th>Rec</th>
+			<th>Yds</th>
+			<th>Lng</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>Att</th>
+			<th>Yds</th>
+			<th>Lng</th>
+			<th>Avg</th>
+			<th>TD</th>
+			<th>FUM</th>
+			<th>Lost</th>
+		</tr>
+		{% for season in player_seasons %}
+		<tr style="font-size:10px">
+			<td>{{season.season}}</td>
+			<td>{{season.player.receiving_rec}}</td>
+			<td>{{season.player.receiving_yds}}</td>
+			<td></td>
+			<td>{{season.receiving_avg|floatformat:-2}}</td>
+			<td>{{season.player.receiving_tds}}</td>
+			<td>{{season.player.rushing_att}}</td>
+			<td>{{season.player.rushing_yds}}</td>
+			<td></td>
+			<td>{{season.rushing_avg|floatformat:-2}}</td>
+			<td>{{season.player.rushing_tds}}</td>
+			<td>{{season.player.fumbles_tot}}</td>
+			<td>{{season.player.fumbles_lost}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
 {% endblock %}
