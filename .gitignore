@@ -43,3 +43,4 @@ Scripts
 
 # Vim
 *.swp
+**/**/.ropeproject/*
